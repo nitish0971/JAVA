@@ -1,0 +1,16 @@
+class Solution {
+    public int pairSum(ListNode head) {
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        while(head!=null){
+            ans.add(head.val);
+            head = head.next;
+        }
+        int sum = Integer.MIN_VALUE;
+        int n = ans.size();
+        for(int i=0;i<n/2;i++){
+            sum = Math.max(sum,ans.get(i)+ans.get(n-1-i));
+        }
+        return sum;
+    }
+}
