@@ -1,0 +1,38 @@
+class Solution {
+    public static ListNode reverse(ListNode head){
+        ListNode prev=null;
+        ListNode curr=head;
+        ListNode next=null;
+
+        while(curr!=null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+    public ListNode removeNodes(ListNode head) {
+        ListNode rev = reverse(head);
+        ListNode temp = rev;
+        ListNode prev = rev;
+        ListNode ans = rev;
+        int maxi = rev.val;
+
+        while(temp!=null && temp.next!=null){
+            temp=temp.next;
+            while(temp!=null && temp.val<maxi){
+                temp=temp.next;
+            }
+            if(temp==null){
+                prev.next=null;
+            }
+            else if(temp!=null){
+                maxi=Math.max(maxi,temp.val);
+                prev.next=temp;
+                prev=prev.next;
+            }
+        }
+        return reverse(ans);
+    }
+}
